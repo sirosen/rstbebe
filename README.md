@@ -35,7 +35,7 @@ or pre-commit config:
 
 ```yaml
 - repo: https://github.com/sirosen/rstbebe
-  rev: 0.1.0
+  rev: 0.2.0
   hooks:
     - id: bad-backticks
       files: changelog\.d/.*\.rst
