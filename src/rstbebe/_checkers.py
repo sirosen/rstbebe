@@ -3,7 +3,7 @@ import typing as t
 
 from ._model import ErrorLine, Position
 
-BAD_BACKTICK_PAT = re.compile(r"(^|\s)`[^`]+`(\s|$)", flags=re.MULTILINE)
+BAD_BACKTICK_PAT = re.compile(r"(^|\s)`[^`]+`([.?!\s]|$)", flags=re.MULTILINE)
 
 
 class BacktickChecker:
@@ -20,5 +20,8 @@ class BacktickChecker:
         for m in BAD_BACKTICK_PAT.finditer(line):
             pos = Position(lineno=lineno, start_col=m.start(), end_col=m.end())
             yield ErrorLine(
-                line=line, pos=pos, message="found what appear to be markdown backticks"
+                filename=self.filename,
+                line=line,
+                pos=pos,
+                message="found what appear to be markdown backticks",
             )

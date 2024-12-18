@@ -1,11 +1,10 @@
 import sys
-import textwrap
 import typing as t
 
 import click
 
 from ._checkers import BacktickChecker
-from ._model import ErrorLine
+from ._model import ErrorLine, collate_errors
 
 
 @click.group
@@ -21,9 +20,18 @@ def bad_backticks(files: t.IO[bytes]):
         errors.extend(BacktickChecker(file.name, file.readlines()).iter_errors())
 
     if errors:
-        print("encountered errors:")
-        for e in errors:
-            print(textwrap.indent(str(e), "  "))
+        collated = collate_errors(errors)
+        for filename, by_lineno in collated.items():
+            print(f"encountered errors in {filename}:")
+            for lineno, line_errors in by_lineno.items():
+                prefix = f"  on line {lineno}: "
+                prefixlen = len(prefix)
+                line = line_errors[0].line
+                print(f"{prefix}{line}")
+                for e in line_errors:
+                    indicators = e.indicators()
+                    message = (" " * (len(e.line) - len(indicators) + 2)) + e.message
+                    print(f"{' ' * prefixlen}{indicators}{message}")
         sys.exit(1)
 
     sys.exit(0)
