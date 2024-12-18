@@ -1,5 +1,5 @@
 - id: bad-backticks
-  name: Detect markdown backticks
+  name: rstbebe bad-backticks
   description: 'Check rst files for markdown backticks'
   entry: rstbebe bad-backticks
   language: python
