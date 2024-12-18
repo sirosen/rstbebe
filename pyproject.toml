@@ -1,0 +1,36 @@
+[build-system]
+requires = ["flit-core"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "rstbebe"
+version = "0.1.0"
+description = "RST baby! Let's go!"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = []
+authors = [
+  { name = "Stephen Rosen", email = "sirosen0@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python",
+]
+dependencies = ["docutils", "click>=8,<9"]
+
+[project.scripts]
+rstbebe = "rstbebe.__main__:main"
+
+[project.urls]
+source = "https://github.com/sirosen/rstbebe"
+changelog = "https://github.com/sirosen/rstbebe/blob/main/CHANGELOG.md"
+
+[tool.flit.sdist]
+include = ["LICENSE.txt", "CHANGELOG.md", "tox.ini"]
+
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+disallow_subclassing_any = false
+files = ["src"]
