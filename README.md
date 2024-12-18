@@ -38,7 +38,7 @@ or pre-commit config:
   rev: 0.1.0
   hooks:
     - id: bad-backticks
-      files: changelog.d/*.rst
+      files: changelog\.d/.*\.rst
 ```
 
 ## Contributing
