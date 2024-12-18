@@ -3,7 +3,7 @@ import typing as t
 
 from ._model import ErrorLine, Position
 
-BAD_BACKTICK_PAT = re.compile(r"(^|\s)`[^`]+`([.?!\s]|$)", flags=re.MULTILINE)
+BAD_BACKTICK_PAT = re.compile(r"(^|\s)`[^`]+`([.,?!\s]|$)", flags=re.MULTILINE)
 
 
 class BacktickChecker:
